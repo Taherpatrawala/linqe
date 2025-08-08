@@ -70,6 +70,11 @@ async function bootstrap() {
       res.json({ status: "ok", timestamp: new Date().toISOString() });
     });
 
+    app.get("/api/keep-alive", (_req, res) => {
+      console.log(`Server alive: ${new Date().toISOString()}`);
+      fetch("https://crons-37pm.onrender.com/api/keep-alive");
+      res.json({ status: "alive" });
+    });
     // 404 handler for unmatched routes
     app.use("*", notFoundHandler);
 
